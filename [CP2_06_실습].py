@@ -15,3 +15,55 @@ print(lst_4)
 a = (x*x for x in range(5))
 for i in range(5):
     print(next(a))
+
+
+def integers():
+    i = 1
+    while True:
+        yield i
+        i += 1
+
+def take(n, seq):
+    seq = iter(seq)
+    result = []
+    try:
+        for i in range(n):
+            result.append(next(seq))
+    except StopIteration:
+        pass
+    return result
+
+pyt = ((x, y, z)
+       for z in integers()
+       for y in range(1, z)
+       for x in range(1, y) if x*x + y*y == z*z)
+print(take(7, pyt))
+
+def func():
+    lst = [1, 2, 3, 4, 5]
+    for i in lst:
+        yield i
+
+f = func()
+try:
+    for i in range(5):
+        print(next(f))
+except StopIteration:
+    print("Error StopIteration")
+else:
+    print("Printing Success")
+finally:
+    print("Exit")
+
+def func(data):
+    assert isinstance(data, list)
+    print("Print data list")
+    print(data)
+
+print("Input List")
+lst = [1, 2, 3, 4, 5]
+func(lst)
+print("Input Dummy tuple")
+dummy = (1, 2, 3, 4, 5)
+func(dummy)
+
